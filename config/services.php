@@ -26,6 +26,11 @@ return [
         'client_secret' => env('FACEBOOK_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
+    'battlenet' => [
+        'client_id' => env('BATTLE.NET_KEY'),
+        'client_secret' => env('BATTLE.NET_SECRET'),
+        'redirect' => env('BATTLE.NET_REDIRECT_URI')
+    ],
     'discord' => [
         'client_id' => env('DISCORD_KEY'),
         'client_secret' => env('DISCORD_SECRET'),
