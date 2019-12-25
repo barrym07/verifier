@@ -26,6 +26,11 @@ return [
         'client_secret' => env('FACEBOOK_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
+    'discord' => [
+        'client_id' => env('DISCORD_KEY'),
+        'client_secret' => env('DISCORD_SECRET'),
+        'redirect' => env('DISCORD_REDIRECT_URI')
+    ],
 
     //'postmark' => [
     //    'token' => env('POSTMARK_TOKEN'),
