@@ -25,6 +25,6 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')
             ->where('provider','battlenet|discord|facebook|live|steam');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')
             ->where('provider','battlenet|discord|facebook|live|steam');
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/account', 'AccountController@show');
