@@ -31,6 +31,11 @@ return [
         'client_secret' => env('DISCORD_SECRET'),
         'redirect' => env('DISCORD_REDIRECT_URI')
     ],
+    'steam' => [
+        'client_id' => null,
+        'client_secret' => env('STEAM_KEY'),
+        'redirect' => env('STEAM_REDIRECT_URI')
+    ],
 
     //'postmark' => [
     //    'token' => env('POSTMARK_TOKEN'),
