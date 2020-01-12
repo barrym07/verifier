@@ -4,48 +4,88 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Verify - AFGaming.gg</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,700i&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+            body {
+                height: 100%;
+                padding: 0px;
+                margin: 0px;
+                background: #3F51B5;
+                color: #fff;
+                font-family: 'Roboto', sans-serif;
             }
 
-            .full-height {
-                height: 100vh;
+            .panel {
+                background: #039BE5;
+                height: 100%;
+                border-radius: 10px;
+                -webkit-box-shadow: 10px 11px 47px -15px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: 10px 11px 47px -15px rgba(0, 0, 0, 0.75);
+                box-shadow: 10px 11px 47px -15px rgba(0, 0, 0, 0.75);
             }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
+            #start {
+                position: absolute;
+                height: 100%;
+                padding: 30px;
+                overflow: auto;
             }
 
-            .position-ref {
-                position: relative;
+            #start .row {
+                
+            }
+
+            #start img {
+                width: 35%;
+                margin: 15% auto;
+                border-radius: 50%;
+            }
+
+            #start #content {
+                position: absolute;
+                background: #fff;
+                color: #37474F;
+                bottom: 0px;
+                left: 0px;
+                height: 55%;
+                border-radius: 0px 0px 10px 10px;
+            }
+
+            #start #content h2 {
+                margin: 25px 0px 25px 0px;
+                font-style: italic;
+                text-align: center;
+            }
+
+            #start #content hr {
+                max-width: 60%;
+            }
+
+            #start #content p {
+                max-width: 85%;
+                margin: 0 auto;
+            }
+
+            #start #content a {
+                width: 45%;
+                margin: 40px auto;
+            }
+
+            #start #content a i {
+                margin-right: 10px;
             }
 
             .top-right {
                 position: absolute;
                 right: 10px;
                 top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
             }
 
             .links > a {
@@ -57,39 +97,36 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                    <a href="{{ url('/logout') }}">Logout</a>
-                @else
-                    <a href="{{ url('/login/facebook') }}">Login</a>
-                @endauth
+        <div class="container-fluid" id="start">
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/logout') }}">Logout</a>
+            @else
+                <a href="{{ url('/login/facebook') }}">Login</a>
+            @endauth
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 panel">
+            <div class="row">
+            <img class="d-flex flex-wrap align-items-center" src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/81675168_132606801539585_556426993315348480_n.png?_nc_cat=108&_nc_oc=AQlKSBe5LXmbdMpiQ5Cssey5gVSbu88vuk8e8IAhxKC9YAViD_4_44mHd9QVjuCbZlo&_nc_ht=scontent-icn1-1.xx&oh=798cf55c414ce77d19272b189a662079&oe=5EA74D0C" />
             </div>
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+            <div class="row">
+            <div class="col-12" id="content">
+                <h2>Get verified</h2>
+                <hr />
+                <p class="lead">Start by logging in with your Facebook account. You will then be prompted for your Air Force email address.</p>
+                <p>A verification email will then be sent.</p>
+                <div class="row">
+                <a class="btn btn-lg btn-primary" href="#"><i class="fab fa-facebook"></i> Login</a>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            </div>
             </div>
         </div>
+        </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </body>
 </html>
