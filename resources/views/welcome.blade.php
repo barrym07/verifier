@@ -23,7 +23,7 @@
             }
 
             .panel {
-                background: #039BE5;
+                background: #3e3e3e;
                 height: 100%;
                 border-radius: 10px;
                 -webkit-box-shadow: 10px 11px 47px -15px rgba(0, 0, 0, 0.75);
@@ -60,8 +60,7 @@
 
             #start .brand {
                 width: 35%;
-                margin: 10% auto;
-                border-radius: 50%;
+                margin: 15% auto;
             }
 
             #start #content {
@@ -133,7 +132,7 @@
 
             .account .header .status {
                 float: left;
-                margin: 24px 30px 0px 20px;
+                margin: 24px 30px 24px 20px;
                 font-size: 18pt;
                 font-weight: 600;
             }
@@ -158,7 +157,7 @@
             <div class="row" style="height: 100%;">
                 <div class="col-sm-12 col-md-6 col-lg-4 panel">
                     <div class="row">
-                        <img class="brand d-flex flex-wrap align-items-center" src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/81675168_132606801539585_556426993315348480_n.png?_nc_cat=108&_nc_oc=AQlKSBe5LXmbdMpiQ5Cssey5gVSbu88vuk8e8IAhxKC9YAViD_4_44mHd9QVjuCbZlo&_nc_ht=scontent-icn1-1.xx&oh=798cf55c414ce77d19272b189a662079&oe=5EA74D0C" />
+                        <img class="brand d-flex flex-wrap align-items-center" src="https://www.airforce.gg/assets/images/image01.png" />
                     </div>
                     <div class="row">
                         <div class="col-12" id="content">
@@ -182,8 +181,11 @@
                             <!-- Profile Header -->
                             <div class="row">
                                 <div class="col-12 header">
+                                  @if (Auth::user()->usaf_verified)
                                     <div class="status">Verified <span>2020-01-12</span></div>
-                                    <img class="avatar" src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/66025809_10156297112457327_7832456473002115072_n.jpg?_nc_cat=106&_nc_oc=AQmUSynEmT7B1vgTpoNQCJesrJ0UZc4wRiqYPnwPVbu8nV0xkkklCZLgT3w_JVxjzgU&_nc_ht=scontent-icn1-1.xx&oh=3073cdd2d4d290f801c40743757caaee&oe=5E9EDB43" />
+                                  @else
+                                    <div class="status">Not Verified</div>
+                                  @endif
                                 </div>
                             </div>
                             <!-- Confirm USAF Email Section -->

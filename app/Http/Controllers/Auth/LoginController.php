@@ -46,7 +46,7 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return redirect('/');
         }
- 
+
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
@@ -88,7 +88,7 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    protected $redirectTo = '/account';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
