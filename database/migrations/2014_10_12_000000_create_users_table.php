@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('usaf_verification')->unique();
             $table->boolean('usaf_verified', false);
             $table->string('password')->nullable();
+            $table->string('component')->nullable();
+            $table->string('discordUsername')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

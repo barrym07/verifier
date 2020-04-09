@@ -157,7 +157,7 @@
             <div class="row" style="height: 100%;">
                 <div class="col-sm-12 col-md-6 col-lg-4 panel">
                     <div class="row">
-                        <img class="brand d-flex flex-wrap align-items-center" src="https://www.airforce.gg/assets/images/image01.png" />
+                        <img class="brand d-flex flex-wrap align-items-center" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829" />
                     </div>
                     <div class="row">
                         <div class="col-12" id="content">
@@ -188,25 +188,34 @@
                                   @endif
                                 </div>
                             </div>
-                            <!-- Confirm USAF Email Section -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> - USAF Affiliation Required</h4>
-                                    <p>Confirm your duty status below.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6">
-                                    <div class="card">
-                                        d
+                            @if (!Auth::user()->usaf_verified)
+                                <!-- Confirm USAF Email Section -->
+                                <form method="post" action="{{ url('/generateVerification') }}" accept-charset="UTF-8">
+                                    @csrf
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="email" name="email" class="form-control" placeholder="USAF Email">
+                                        </div>
+                                        <div class="col">
+                                            <input type="email" class="form-control" placeholder="Confirm USAF Email">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-6">
-                                    <div class="card">
-                                        d
+                                    <div class="form-row">
+                                        <div class="col">
+                                        <select name="component" class="form-control">
+                                            <option selected>Componennt...</option>
+                                            <option value="Active Duty">Active Duty</option>
+                                            <option value="Guard">Guard</option>
+                                            <option value="Reserve">Reserve</option>
+                                        </select>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="discord" class="form-control" placeholder="Discord i.e Name#1234">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <button type="submit" class="btn btn-primary">Send email</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 @endauth

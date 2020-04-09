@@ -28,3 +28,5 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/account', 'AccountController@show');
+
+Route::post('/generateVerification', 'AccountController@emailAuthToken');
