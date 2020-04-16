@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendVerification;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class AccountController extends Controller
@@ -45,6 +48,33 @@ class AccountController extends Controller
       Mail::to($user->usaf_email)->send(new SendVerification($user->usaf_email));
 
       return back();
+    }
+
+    public function handleVerifyAttempt($token, Request $request) {
+
+      $user = User::where('usaf_verification', $token)->first();
+      $user->usaf_verified = true;
+      $user->save();
+
+      if ($user->usaf_verified === true) {
+        $client = new \GuzzleHttp\Client([
+          'headers' => ['Content-Type' => 'application/json']
+        ]);
+  
+        $reqParamArray['message_id'] = Str::uuid();
+        $reqParamArray['type'] = 'Verification';
+        $reqParamArray['disc_name'] = $user->discordUsername;
+        $reqParamArray['real_name'] = $user->name;
+        $reqParamArray['email'] = $user->usaf_email;
+        $reqParamArray['url'] = 'https://airforcegaming.com/user/123';
+  
+        $params[] = $reqParamArray;
+        $data = json_encode($params);
+  
+        $response = $client->post('http://localhost:3000/verified', 
+          ['body' => $data]
+        );
+      }
     }
 
     public function logout () {

@@ -30,3 +30,4 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/account', 'AccountController@show');
 
 Route::post('/generateVerification', 'AccountController@emailAuthToken');
+Route::get('/verify/{token}', 'AccountController@handleVerifyAttempt');
