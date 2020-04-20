@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
+            $table->string('avatar')->nullable();
             $table->string('usaf_email')->unique()->nullable();
             $table->string('usaf_verification')->unique();
             $table->boolean('usaf_verified', false);

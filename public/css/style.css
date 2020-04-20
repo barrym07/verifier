@@ -1,0 +1,80 @@
+.loader {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: 'Source Sans Pro', ;
+      -moz-transform: scale(1);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noise%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.875%22%20result%3D%22noise%22%20%2F%3E%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.5%200%22%20%2F%3E%3C%2Ffilter%3E%3Crect%20filter%3D%22url%28%23noise%29%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22512%22%20height%3D%22512%22%20fill%3D%22transparent%22%20opacity%3D%221%22%20%2F%3E%3C%2Fsvg%3E'), linear-gradient(45deg, #000422 25%, #002C82 68%);
+      background-size: 512px, auto;
+      background-position: center, 0% 0%;
+    background-repeat: repeat, repeat;
+    z-index: 1000;
+  }
+  
+  .background {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: 'Source Sans Pro', ;
+      -moz-transform: scale(1);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noise%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.875%22%20result%3D%22noise%22%20%2F%3E%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.5%200%22%20%2F%3E%3C%2Ffilter%3E%3Crect%20filter%3D%22url%28%23noise%29%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22512%22%20height%3D%22512%22%20fill%3D%22transparent%22%20opacity%3D%221%22%20%2F%3E%3C%2Fsvg%3E'), linear-gradient(45deg, #000422 25%, #002C82 68%);
+      background-size: 512px, auto;
+      background-position: center, 0% 0%;
+    background-repeat: repeat, repeat;
+  }
+  
+  .header, .container {
+    display: none;
+    transition: 0.5s;
+  }
+  
+  .header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: +200;
+  }
+  
+  .header-nav {
+    color: #fff;
+    list-style-type: none;
+    font-weight: 600;
+  }
+  
+  .header-nav li {
+    display: inline;
+    padding: 3px 7px 5px 7px;
+    margin-right: 10px; 
+    border-radius: 7px;
+    transition: 0.5s;
+  }
+  
+  .header-nav li:hover {
+    transition: 0.5s;
+    background: #651fff;
+  }
+  
+  .header-nav i {
+    font-size: 12pt;
+    line-height: 50%;
+    margin-left: 5px;
+    padding: 0px;
+  }
+  
+  .header-nav i:hover {
+    opacity: 1;
+  }
+  
+  .header-nav .logo {
+    position: relative;
+    top: 2px;
+    max-width: 70px;
+  }

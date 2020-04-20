@@ -31,16 +31,22 @@ class AccountController extends Controller
     public function show()
     {
       $user = Auth::user();
-      return view('account', ['user' => $user, 'accountsLinked' => $user->identities()]);
+      return view('layouts.account.show', ['user' => $user, 'accountsLinked' => $user->identities()]);
     }
 
     public function emailAuthToken(Request $request) {
 
+      $validatedData = $request->validate([
+        'usaf_email' => 'required|unique:users|max:255|regex:/(.*).mil$/i',
+        'discordUsername' => 'required|unique:users|max:255|regex:/[#]/',
+        'component' => 'required',
+      ]);
+
       $user = Auth::user();
 
-      $user->usaf_email =  $request->input('email');
+      $user->usaf_email =  $request->input('usaf_email');
       $user->component =  $request->input('component');
-      $user->discordUsername =  $request->input('discord');
+      $user->discordUsername =  $request->input('discordUsername');
 
       $user->save();
 

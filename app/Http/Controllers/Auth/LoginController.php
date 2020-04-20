@@ -69,6 +69,7 @@ class LoginController extends Controller
                 $user = User::create([
                     'email' => $providerUser->getEmail(),
                     'name'  => $providerUser->getName(),
+                    'avatar' => $providerUser->getAvatar(),
                     'usaf_verification' => $ustring,
                     'usaf_verified' => false,
                 ]);
@@ -88,7 +89,7 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new controller instance.
