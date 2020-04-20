@@ -80,6 +80,8 @@ class AccountController extends Controller
         $response = $client->post('http://localhost:3000/verified', 
           ['body' => $data]
         );
+
+        return view('layouts.verified');
       }
     }
 
