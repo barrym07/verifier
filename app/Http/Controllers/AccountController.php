@@ -50,7 +50,14 @@ class AccountController extends Controller
 
       $user->save();
 
-      //Mail::to($request->user())->send(new SendVerification());
+      Mail::to($user->usaf_email)->send(new SendVerification($user->usaf_email));
+
+      return back();
+    }
+
+    public function resendEmailAuthToken() {
+      $user = Auth::User();
+
       Mail::to($user->usaf_email)->send(new SendVerification($user->usaf_email));
 
       return back();

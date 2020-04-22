@@ -31,14 +31,16 @@
         border-radius: 5px;
         background: #512da8;
         text-align: center;
+        color: #fff;
       }
 
       p {
+        font-size: 130%;
         padding-bottom: 10px;
       }
 
       p.lead {
-        font-size: 130%;
+        font-size: 160%;
       }
 
       .button {
@@ -56,7 +58,7 @@
 
   <body>
     <div class="header">
-      <img class="logo" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829"></img>
+      <img class="logo" src="https://news.airforcegaming.com/content/images/2020/03/DarkColour.png"></img>
       <h4>Airforcegaming.com</h4>
       <h5>#FlyFightWin</h5>
     </div>

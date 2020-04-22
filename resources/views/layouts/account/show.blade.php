@@ -1,5 +1,3 @@
-# Corrected label display for discord username input on line 198 (196 in original)
-
 @extends('layouts.app')
 
 @section('title', 'My Account')
@@ -76,6 +74,14 @@
     .dropdown-content li > a, .dropdown-content li > span {
         color: #fff;
     }
+
+    .resend {
+        margin-left: 5px;
+        padding: 5px 10px 5px 10px;
+        font-size: 70%;
+        border-radius: 15px;
+        cursor: pointer;
+    }
 </style>
 @endsection
 
@@ -148,7 +154,7 @@
                 @if ($user->usaf_email)
                     <div class="col s12">
                         <div class="card verification green accent-2 black-text center-align">
-                            <h5>Email sent</h5>
+                            <h5 class="black-text">Email sent <a href="{{ url('/resend') }}" style="text-decoration: none; color: #212121;"><span class="resend light-green accent-4">Re-send</span></a></h5>
                         </div>
                     </div>
                 @endif
