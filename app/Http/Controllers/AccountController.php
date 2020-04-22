@@ -66,29 +66,34 @@ class AccountController extends Controller
     public function handleVerifyAttempt($token, Request $request) {
 
       $user = User::where('usaf_verification', $token)->first();
-      $user->usaf_verified = true;
-      $user->save();
 
-      if ($user->usaf_verified === true) {
-        $client = new \GuzzleHttp\Client([
-          'headers' => ['Content-Type' => 'application/json']
-        ]);
-  
-        $reqParamArray['message_id'] = Str::uuid();
-        $reqParamArray['type'] = 'Verification';
-        $reqParamArray['disc_name'] = $user->discordUsername;
-        $reqParamArray['real_name'] = $user->name;
-        $reqParamArray['email'] = $user->usaf_email;
-        $reqParamArray['url'] = 'https://airforcegaming.com/user/123';
-  
-        $params[] = $reqParamArray;
-        $data = json_encode($params);
-  
-        $response = $client->post('http://localhost:3000/verified', 
-          ['body' => $data]
-        );
+      if ($user->usaf_verified == true) {
+        return redirect('account');
+      } else {
+        $user->usaf_verified = true;
+        $user->save();
 
-        return view('layouts.verified');
+        if ($user->usaf_verified === true) {
+          $client = new \GuzzleHttp\Client([
+            'headers' => ['Content-Type' => 'application/json']
+          ]);
+    
+          $reqParamArray['message_id'] = Str::uuid();
+          $reqParamArray['type'] = 'Verification';
+          $reqParamArray['disc_name'] = $user->discordUsername;
+          $reqParamArray['real_name'] = $user->name;
+          $reqParamArray['email'] = $user->usaf_email;
+          $reqParamArray['url'] = 'https://airforcegaming.com/user/123';
+    
+          $params[] = $reqParamArray;
+          $data = json_encode($params);
+    
+          $response = $client->post('http://localhost:3000/verified', 
+            ['body' => $data]
+          );
+
+          return view('layouts.verified');
+        } 
       }
     }
 
