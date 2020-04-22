@@ -45,6 +45,9 @@
                                     <a class="waves-effect waves-light btn blue" href="{{ url('logout') }}"><i class="fab fa-facebook"></i> Logout</a>
                                 @else
                                     <a class="waves-effect waves-light btn-large blue" href="{{ url('login/facebook') }}"><i class="fab fa-facebook"></i> Login</a>
+                                    <blockquote style="margin-top: 50px;">
+                                        Not using Facebook? <a href="https://accounts258614.typeform.com/to/kiBVrV">Apply manually</a> instead.
+                                    </blockquote>
                                 @endauth
                             </div>
                         </div>
