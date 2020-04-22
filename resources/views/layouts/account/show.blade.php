@@ -87,7 +87,11 @@
 
 @section('content')
 <div class="row no-margin" style="margin-top: 12vh;">
-    <div class="col s12 l6">
+    @if ($user->usaf_verified)
+        <div class="col s12 l6 offset-l3">
+    @else
+        <div class="col s12 l6">
+    @endif
         <div class="row">
             <div class="col s12">
                 <div class="card server grey darken-4 white-text">
