@@ -1,3 +1,5 @@
+# Corrected label display for discord username input on line 198 (196 in original)
+
 @extends('layouts.app')
 
 @section('title', 'My Account')
@@ -193,7 +195,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <input placeholder="Name#1234" id="discordUsername" name="discordUsername" type="text" class="validate white-text">
-                                        <label for="discordUsername">Total-force email</label>
+                                        <label for="discordUsername">Discord Username</label>
                                     </div>
                                 </div>
                                 <div class="row">
