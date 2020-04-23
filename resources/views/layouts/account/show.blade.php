@@ -75,8 +75,8 @@
         color: #fff;
     }
 
-    .resend {
-        margin-left: 5px;
+    .resend, .discord {
+        margin: 0px 5px 0px 5px;
         padding: 5px 10px 5px 10px;
         font-size: 70%;
         border-radius: 15px;
@@ -153,6 +153,11 @@
                 <div class="col s12">
                     <div class="card verification deep-orange white-text center-align">
                         <h5>Verification: Required</h5>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="card verification blue lighten-1 white-text center-align">
+                        <h5>Join <a class="discord" href="https://discord.gg/airforcegaming" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
                     </div>
                 </div>
                 @if ($user->usaf_email)

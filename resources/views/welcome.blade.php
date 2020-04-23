@@ -36,6 +36,8 @@
                                 <p class="lead">Start by logging in with your Facebook account. You will then be prompted for your Air Force email address.</p>
                                 <br />
                                 <p>A verification email will then be sent.</p>
+                                <br />
+                                <p style="font-weight: 600; font-size: 115%;"><i>Please ensure you are in <a href="https://discord.gg/airforcegaming" target="_blank">Discord</a> first</i></p>
                             </div>
                         </div>
                         <div class="row">
