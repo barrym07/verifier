@@ -35,14 +35,20 @@ class AccountController extends Controller
     }
 
     public function emailAuthToken(Request $request) {
-
-      $validatedData = $request->validate([
-        'usaf_email' => 'required|unique:users|max:255|regex:/(.*).mil$/i',
-        'discordUsername' => 'required|unique:users|max:255|regex:/[#]/',
-        'component' => 'required',
-      ]);
-
       $user = Auth::user();
+
+      if (!$user->discordUsername) {
+        $validatedData = $request->validate([
+          'usaf_email' => 'required|unique:users|max:255|regex:/(.*).mil$/i',
+          'discordUsername' => 'required|unique:users|max:255|regex:/[#]/',
+          'component' => 'required',
+        ]);
+      } else {
+        $validatedData = $request->validate([
+          'usaf_email' => 'required|unique:users|max:255|regex:/(.*).mil$/i',
+          'component' => 'required',
+        ]);
+      }
 
       $user->usaf_email =  $request->input('usaf_email');
       $user->component =  $request->input('component');

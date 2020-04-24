@@ -124,7 +124,7 @@
                                     </li>
                                     <li class="collection-item center deep-purple darken-1">
                                         <div class="left"><i class="fab fa-discord"></i></div>
-                                        @if (!$user->usaf_email)
+                                        @if (!$user->discordUsername)
                                             <span class="center-align">Discord: Needed</span>
                                         @else
                                         <span class="center-align">{{ $user->discordUsername }}</span>
@@ -136,7 +136,7 @@
                         <div class="row">
                             <div class="col s12 l8 offset-l2 center">
                                 @auth
-                                <a class="waves-effect waves-light btn-large blue" href="{{ url('logout') }}"><i class="fab fa-facebook"></i> Logout</a>
+                                <a class="waves-effect waves-light btn-large blue" href="{{ url('logout') }}">Logout</a>
                                 @else
                                     <a class="waves-effect waves-light btn-large blue" href="{{ url('login/facebook') }}"><i class="fab fa-facebook"></i> Login</a>
                                 @endauth
@@ -207,12 +207,14 @@
                                         <label>Service component</label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input placeholder="Name#1234" id="discordUsername" name="discordUsername" type="text" class="validate white-text">
-                                        <label for="discordUsername">Discord Username</label>
+                                @if (!$user->discordUsername)
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="Name#1234" id="discordUsername" name="discordUsername" type="text" class="validate white-text">
+                                            <label for="discordUsername">Discord Username</label>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <div class="row">
                                     <button type="submit" class="waves-effect waves-light btn-large blue">Send email</button>
                                 </div>

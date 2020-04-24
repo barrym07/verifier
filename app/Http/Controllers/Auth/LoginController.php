@@ -31,7 +31,13 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        return Socialite::with($provider)->redirect();
+        if ($provider === 'discord') {
+            return Socialite::driver($provider)
+                ->setScopes(['identify', 'email', 'guilds', 'guilds.join'])
+                ->redirect();
+        } else {
+            return Socialite::with($provider)->redirect();
+        }
     }
 
     /**
@@ -66,13 +72,30 @@ class LoginController extends Controller
             if (! $user) {
                 $ustring = Str::random(32);
                 print $ustring;
-                $user = User::create([
-                    'email' => $providerUser->getEmail(),
-                    'name'  => $providerUser->getName(),
-                    'avatar' => $providerUser->getAvatar(),
-                    'usaf_verification' => $ustring,
-                    'usaf_verified' => false,
-                ]);
+                if ($provider === 'discord') {
+                    $user = User::create([
+                        'email' => $providerUser->getEmail(),
+                        'name'  => $providerUser->getName(),
+                        'avatar' => $providerUser->getAvatar(),
+                        'discordUsername' => $providerUser->getNickname(),
+                        'usaf_verification' => $ustring,
+                        'usaf_verified' => false,
+                    ]);
+                } else {
+                    $user = User::create([
+                        'email' => $providerUser->getEmail(),
+                        'name'  => $providerUser->getName(),
+                        'avatar' => $providerUser->getAvatar(),
+                        'usaf_verification' => $ustring,
+                        'usaf_verified' => false,
+                    ]);
+                }
+            }
+
+            if ($provider === 'discord') {
+                $user = User::whereEmail($providerUser->getEmail())->first();
+                $user->discordUsername = $providerUser->getNickname();
+                $user->save();
             }
 
             $user->identities()->create([
