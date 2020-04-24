@@ -56,9 +56,9 @@
                                             <a class="waves-effect waves-light btn login blue" href="{{ url('login/discord') }}"><i class="fab fa-discord"></i> Login</a>
                                         </div>
                                     </div>
-                                    <blockquote style="margin-top: 40px;">
+                                    <!--<blockquote style="margin-top: 40px;">
                                         Not using Facebook? <a href="https://accounts258614.typeform.com/to/kiBVrV">Apply manually</a> instead.
-                                    </blockquote>
+                                    </blockquote>-->
                                 @endauth
                             </div>
                         </div>
