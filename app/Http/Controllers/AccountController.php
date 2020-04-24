@@ -46,18 +46,25 @@ class AccountController extends Controller
           'discordUsername' => 'required|unique:users|max:255|regex:/[#]/',
           'component' => 'required',
         ]);
+        
+        $user->discordUsername =  $request->input('discordUsername');
+        $user->usaf_email =  $request->input('usaf_email');
+        $user->component =  $request->input('component');
+
+        $user->save();
+
       } else {
         $validatedData = $request->validate([
           'usaf_email' => 'required|unique:users|max:255|regex:/(.*).mil$/i',
           'component' => 'required',
         ]);
+        $user->discordUsername =  $request->input('discordUsername');
+        $user->usaf_email =  $request->input('usaf_email');
+        $user->component =  $request->input('component');
+
+        $user->save();
       }
 
-      $user->usaf_email =  $request->input('usaf_email');
-      $user->component =  $request->input('component');
-      $user->discordUsername =  $request->input('discordUsername');
-
-      $user->save();
 
       Mail::to($user->usaf_email)->send(new SendVerification($user->usaf_email));
 

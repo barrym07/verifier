@@ -228,6 +228,12 @@
                                             <label for="discordUsername">Discord Username</label>
                                         </div>
                                     </div>
+                                @else
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="{{ $user->discordUsername }}" value="{{ $user->discordUsername }}" id="discordUsername"  name="discordUsername" type="hidden" class="validate white-text">
+                                        </div>
+                                    </div>
                                 @endif
                                 <div class="row">
                                     <button type="submit" class="waves-effect waves-light btn-large blue">Send email</button>
