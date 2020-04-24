@@ -31,7 +31,10 @@ class AccountController extends Controller
     public function show()
     {
       $user = Auth::user();
-      return view('layouts.account.show', ['user' => $user, 'accountsLinked' => $user->identities()]);
+
+      $accountsLinked = DB::table('social_identities')->where('user_id', '=', $user->id)->get();
+
+      return view('layouts.account.show', ['user' => $user, 'accountsLinked' => $accountsLinked]);
     }
 
     public function emailAuthToken(Request $request) {

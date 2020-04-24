@@ -82,6 +82,10 @@
         border-radius: 15px;
         cursor: pointer;
     }
+
+    .accounts i {
+        font-size: 20pt;
+    }
 </style>
 @endsection
 
@@ -104,6 +108,16 @@
                         </div>
                         <br />
                         <div class="row">
+                            <div class="col s12 center">
+                                <h5 style="font-size: 14pt; margin-bottom: 20px;">Linked Accounts</h5>
+                                <div class="row">
+                                    <div class="col s12 accounts">
+                                        @foreach ($accountsLinked as $account)
+                                        <i class="fab fa-{{ $account->provider_name }}"></i>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col s12">
                                 <ul class="collection account-info white-text" style="border-color: #512da8; width: 100%;">
                                     <li class="collection-item center deep-purple darken-1">
