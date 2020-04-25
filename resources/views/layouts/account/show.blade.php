@@ -284,7 +284,7 @@
     <div class="modal-content accounts">
         <div class="row">
             <h4>Linked Accounts</h4>
-            <p>Here you can link and manage 3rd-party accounts to your Air Force Gaming (AFG) account. AFG will only utilize 3rd-party account information to help prove social identities across major gaming platforms.</p>
+            <p>Here you can link and manage 3rd-party accounts to your Air Force Gaming (AFG) account. AFG will only utilize 3rd-party account information to help prove social identities across major gaming platforms. <b>Account linking requires matched email address per platform</b></p>
         </div>
         <div class="row">
             <div class="col s12">
