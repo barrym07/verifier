@@ -32,5 +32,10 @@ $(window).on('load', function() {
                 $('#connect-microsoft').toggle({ duration: 90 });
             }
         ); 
+        $('.accounts .not-connected#twitch').hover(
+            function() { 
+                $('#connect-twitch').toggle({ duration: 90 });
+            }
+        ); 
     });
 });

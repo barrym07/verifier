@@ -356,6 +356,16 @@
                     </div>
                 </div>
             @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'twitch']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="twitch">
+                        <i class="fab fa-twitch" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-twitch">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             </div> 
         </div>
         <div class="modal-footer">
