@@ -144,6 +144,12 @@
                                         <span class="center-align">{{ $user->discordUsername }}</span>
                                         @endif
                                     </li>
+                                    @if ($user->usaf_verified)
+                                        <li class="collection-item center deep-purple darken-1">
+                                            <div class="left"><i class="fas fa-user-check"></i></div>
+                                            <span class="center-align">Verified</span>
+                                        </li>
+                                    @endif
                                 </ul>    
                             </div>
                         </div>
