@@ -27,6 +27,9 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
             ->where('provider','battlenet|discord|facebook|live|steam');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('connect/{provider}', 'AccountController@connectProvider')
+            ->where('provider','battlenet|discord|facebook|live|steam');
+
 Route::get('/account', 'AccountController@show')->middleware('auth');
 
 Route::post('/generateVerification', 'AccountController@emailAuthToken');

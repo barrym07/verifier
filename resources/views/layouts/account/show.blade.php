@@ -75,7 +75,7 @@
         color: #fff;
     }
 
-    .resend, .discord {
+    .resend, .discord, .add-account {
         margin: 0px 5px 0px 5px;
         padding: 5px 10px 5px 10px;
         font-size: 70%;
@@ -85,6 +85,32 @@
 
     .accounts i {
         font-size: 20pt;
+    }
+
+    .accounts .card {
+        text-align: center;
+        padding: 50px 15px 50px 15px;
+        transition: 0.5s;
+        background: #212121;
+    }
+
+    .accounts .card:hover {
+        transition: 0.5s;
+        background: #651fff;
+    }
+
+    .accounts .card i {
+        font-size: 30pt;
+    }
+
+    .accounts .card .connect {
+        display: none;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        font-size: 12pt;
+        font-weight: 500;
     }
 </style>
 @endsection
@@ -109,7 +135,7 @@
                         <br />
                         <div class="row">
                             <div class="col s12 center">
-                                <h5 style="font-size: 14pt; margin-bottom: 20px;">Linked Accounts</h5>
+                                <h5 style="font-size: 14pt; margin-bottom: 20px;">Linked Accounts <a class="add-account grey-text text-darken-4 waves-effect waves-dark modal-trigger" href="#linkAccounts" style="background: #fff; border-radius: 15px;">Add</a></h5>
                                 <div class="row">
                                     <div class="col s12 accounts">
                                         @foreach ($accountsLinked as $account)
@@ -250,6 +276,91 @@
                 </div>
             </div>
         @endif
+    </div>
+</div>
+
+<!-- modals -->
+<div id="linkAccounts" class="modal modal-fixed-footer">
+    <div class="modal-content accounts">
+        <div class="row">
+            <h4>Linked Accounts</h4>
+            <p>Here you can link and manage 3rd-party accounts to your Air Force Gaming (AFG) account. AFG will only utilize 3rd-party account information to help prove social identities across major gaming platforms.</p>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h5>Connected</h5>
+            </div>
+            @foreach ($accountsLinked as $account)
+                <div class="col s6 m3">
+                    <div class="card valign-wrapper grey darken-4 white-text z-depth-2">
+                        <i class="fab fa-{{ $account->provider_name }}" style="margin: 0px auto;"></i>
+                    </div>
+                </div>                 
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h5>Not Connected</h5>
+            </div>
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'facebook']])->get() == '[]')
+                <div class="col s6 m3">
+                    <a href="{{ url('connect/facebook') }}">
+                        <div class="card not-connected valign-wrapper white-text z-depth-3" id="facebook">
+                            <i class="fab fa-facebook" style="margin: 0px auto;"></i><br/>
+                            <div class="connect center-text" id="connect-facebook">
+                                <p>Connect</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'discord']])->get() == '[]')
+                <div class="col s6 m3">
+                    <a href="{{ url('connect/discord') }}">
+                        <div class="card not-connected valign-wrapper white-text z-depth-3" id="discord">
+                            <i class="fab fa-discord" style="margin: 0px auto;"></i><br/>
+                            <div class="connect center-text" id="connect-discord">
+                                <p>Connect</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'steam']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="steam">
+                        <i class="fab fa-steam" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-steam">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'battlenet']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="battlenet">
+                        <i class="fab fa-battle-net" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-battlenet">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'live']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="microsoft">
+                        <i class="fab fa-windows" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-microsoft">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+        </div>
     </div>
 </div>
 @endsection

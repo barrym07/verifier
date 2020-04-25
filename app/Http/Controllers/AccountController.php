@@ -113,6 +113,12 @@ class AccountController extends Controller
       }
     }
 
+    public function connectProvider($provider) {
+      Auth::logout();
+
+      return redirect('login/'.$provider);
+    }
+
     public function logout () {
       Auth::logout();
       return redirect()->route('/');
