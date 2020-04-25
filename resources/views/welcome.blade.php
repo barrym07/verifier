@@ -41,7 +41,7 @@
                                 <br />
                                 <p>A verification email will then be sent.</p>
                                 <br />
-                                <p style="font-weight: 600; font-size: 115%;"><i>Please ensure you are in <a href="https://discord.gg/airforcegaming" target="_blank">Discord</a> first if not logging in with Discord</i></p>
+                                <p style="font-weight: 600; font-size: 115%;"><i>Please ensure you are in <a href="https://discord.gg/airforcegaming" target="_blank">Discord</a> before attempting verification</i></p>
                             </div>
                         </div>
                         <div class="row">
@@ -52,7 +52,6 @@
                                 @else
                                     <div class="row">
                                         <div class="col s12">
-                                            <a class="waves-effect waves-light btn login blue" href="{{ url('login/facebook') }}"><i class="fab fa-facebook"></i> Login</a>
                                             <a class="waves-effect waves-light btn login blue" href="{{ url('login/discord') }}"><i class="fab fa-discord"></i> Login</a>
                                         </div>
                                     </div>
