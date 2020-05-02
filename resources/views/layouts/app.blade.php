@@ -58,9 +58,9 @@
                         <div class="background">
                             <img class="right" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829">
                         </div>
-                        <img class="circle" src="{{ $user->avatar }}"></a>
-                        <span class="white-text name">{{ $user->name }}</span>
-                        <span class="white-text email">{{ $user->email }}</span>
+                        <img class="circle" src="{{ Auth::User()->avatar }}"></a>
+                        <span class="white-text name">{{ Auth::User()->name }}</span>
+                        <span class="white-text email">{{ Auth::User()->email }}</span>
                     </div>
                 </li>
             @endauth
