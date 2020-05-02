@@ -323,18 +323,18 @@
                     <div class="card server no-buffer grey darken-4 white-text">
                         <div class="card-content center">
                             <ul class="collapsible" style="border-color: #512da8;">
-                                @foreach ($users as $user)
+                                @foreach ($users as $user1)
                                     <li>
                                         <div class="collapsible-header grey darken-4 white-text valign-wrapper" style="border-color: #512da8;">
                                             <img class="admin-user-img circle" src="{{ $user->avatar }}"></img>
                                             <ul class="admin-user-info">
-                                                <li>{{ $user->usaf_email }}</li>
-                                                @if ($user->usaf_verified)
+                                                <li>{{ $user1->usaf_email }}</li>
+                                                @if ($user1->usaf_verified)
                                                     <li><i class="fas fa-user-check light-green-text text-accent-3"></i></li>
                                                 @else
                                                     <li><i class="fas fa-user-check red-text text-accent-3"></i></li>
                                                 @endif
-                                                @if ($user->isAdmin)
+                                                @if ($user1->isAdmin)
                                                     <i class="fas fa-user-shield"></i>
                                                 @endif
                                             </ul>
@@ -342,16 +342,16 @@
                                         <div class="collapsible-body" style="border-color: #512da8;">
                                             <div class="row left-align" style="margin: 0px;">
                                                 <div class="col s12 m6 info">
-                                                    <b>Name: </b> {{ $user->name }}
+                                                    <b>Name: </b> {{ $user1->name }}
                                                 </div>
                                                 <div class="col s12 m6 info">
-                                                    <b>Email: </b> {{ $user->email }}
+                                                    <b>Email: </b> {{ $user1->email }}
                                                 </div>
                                                 <div class="col s12 m6 info">
-                                                    <b>Discord: </b> {{ $user->discordUsername }}
+                                                    <b>Discord: </b> {{ $user1->discordUsername }}
                                                 </div>
                                                 <div class="col s12 m6 info">
-                                                    <b>Component: </b> {{ $user->component }}
+                                                    <b>Component: </b> {{ $user1->component }}
                                                 </div>
                                             </div>
                                             <div class="row left-align" style="margin: 0px;">
@@ -359,14 +359,14 @@
                                                     <h5>Actions</h5>
                                                 </div>
                                                 <div class="col s6 info center-align">
-                                                    @if (!$user->isAdmin)
-                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user->id.'/elevate') }}">+ admin</a>
+                                                    @if (!$user1->isAdmin)
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/elevate') }}">+ admin</a>
                                                     @else
-                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user->id.'/downgrade') }}">- admin</a>
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/downgrade') }}">- admin</a>
                                                     @endif
                                                 </div>
                                                 <div class="col s6 info center-align">
-                                                    <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user->id.'/delete') }}">Delete user</a>
+                                                    <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user1->id.'/delete') }}">Delete user</a>
                                                 </div>
                                             </div>
                                         </div>
