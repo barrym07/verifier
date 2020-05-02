@@ -35,8 +35,8 @@ class AccountController extends Controller
 
       $totalAccounts = User::count();
       $verifiedAccounts = User::where('usaf_verified', 1)->count();
-      $users = User::orderBy('isAdmin')
-                  ->orderBy('created_at')
+      $users = User::orderByDesc('isAdmin')
+                  ->orderByDesc('created_at')
                   ->get();
 
       $accountsLinked = DB::table('social_identities')->where('user_id', '=', $user->id)->get();
