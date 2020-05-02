@@ -334,6 +334,9 @@
                                                 @else
                                                     <li><i class="fas fa-user-check red-text text-accent-3"></i></li>
                                                 @endif
+                                                @if ($user->isAdmin)
+                                                    <i class="fas fa-user-shield"></i>
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="collapsible-body" style="border-color: #512da8;">
