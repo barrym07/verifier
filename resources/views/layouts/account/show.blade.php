@@ -112,12 +112,42 @@
         font-size: 12pt;
         font-weight: 500;
     }
+
+    .admin ul {
+        padding-bottom: 15px;
+    }
+
+    .admin ul li {
+        display: inline;
+        margin: 0px 3px 0px 3px;
+        font-size: 13pt;
+    }
+
+    .admin-user-info li, .admin-user-info i {
+        display: inline;
+        margin: 0px 3px 0px 3px;
+        font-size: 12pt;
+    }
+
+    .admin-user-img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .collapsible-body .info {
+        padding: 5px 0px 5px 0px;
+        word-wrap: break-word;
+    }
+
+    .collapsible-body .info h5 {
+        font-size: 15pt;
+    }
 </style>
 @endsection
 
 @section('content')
 <div class="row no-margin" style="margin-top: 12vh;">
-    @if ($user->usaf_verified)
+    @if ($user->usaf_verified && !$user->isAdmin)
         <div class="col s12 l6 offset-l3">
     @else
         <div class="col s12 l6">
@@ -271,6 +301,75 @@
                                     <button type="submit" class="waves-effect waves-light btn-large blue">Send email</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if ($user->isAdmin)
+            <div class="row" style="margin-bottom: 0px;">
+                <div class="col s12">
+                    <div class="card verification admin blue lighten-1 white-text center-align">
+                        <h5>Admin-land</h5>
+                        <ul>
+                            <li><b>Total Accounts:</b> {{ $totalAccounts }}</li>
+                            <li><b>Verified:</b> {{ $verifiedAccounts }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card server no-buffer grey darken-4 white-text">
+                        <div class="card-content center">
+                            <ul class="collapsible" style="border-color: #512da8;">
+                                @foreach ($users as $user)
+                                    <li>
+                                        <div class="collapsible-header grey darken-4 white-text valign-wrapper" style="border-color: #512da8;">
+                                            <img class="admin-user-img circle" src="{{ $user->avatar }}"></img>
+                                            <ul class="admin-user-info">
+                                                <li>{{ $user->usaf_email }}</li>
+                                                @if ($user->usaf_verified)
+                                                    <li><i class="fas fa-user-check light-green-text text-accent-3"></i></li>
+                                                @else
+                                                    <li><i class="fas fa-user-check red-text text-accent-3"></i></li>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body" style="border-color: #512da8;">
+                                            <div class="row left-align" style="margin: 0px;">
+                                                <div class="col s12 m6 info">
+                                                    <b>Name: </b> {{ $user->name }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Email: </b> {{ $user->email }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Discord: </b> {{ $user->discordUsername }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Component: </b> {{ $user->component }}
+                                                </div>
+                                            </div>
+                                            <div class="row left-align" style="margin: 0px;">
+                                                <div class="col s12 info">
+                                                    <h5>Actions</h5>
+                                                </div>
+                                                <div class="col s6 info center-align">
+                                                    @if (!$user->isAdmin)
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user->id.'/elevate') }}">+ admin</a>
+                                                    @else
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user->id.'/downgrade') }}">- admin</a>
+                                                    @endif
+                                                </div>
+                                                <div class="col s6 info center-align">
+                                                    <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user->id.'/delete') }}">Delete user</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>

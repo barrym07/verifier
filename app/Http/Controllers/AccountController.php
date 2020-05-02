@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendVerification;
 use App\User;
+use App\SocialIdentity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -32,9 +33,13 @@ class AccountController extends Controller
     {
       $user = Auth::user();
 
+      $totalAccounts = User::count();
+      $verifiedAccounts = User::where('usaf_verified', 1)->count();
+      $users =  User::all();
+
       $accountsLinked = DB::table('social_identities')->where('user_id', '=', $user->id)->get();
 
-      return view('layouts.account.show', ['user' => $user, 'accountsLinked' => $accountsLinked]);
+      return view('layouts.account.show', ['user' => $user, 'accountsLinked' => $accountsLinked, 'totalAccounts' => $totalAccounts, 'verifiedAccounts' => $verifiedAccounts, 'users' => $users]);
     }
 
     public function emailAuthToken(Request $request) {
@@ -117,6 +122,26 @@ class AccountController extends Controller
       Auth::logout();
 
       return redirect('login/'.$provider);
+    }
+
+    public function deleteUser($user) {
+      User::destroy($user);
+      SocialIdentity::where('user_id', $user)->delete();
+      return back();
+    }
+
+    public function addAdmin($user) {
+      $user = User::find($user);
+      $user->isAdmin = 1;
+      $user->save();
+      return back();
+    }
+
+    public function removeAdmin($user) {
+      $user = User::find($user);
+      $user->isAdmin = 0;
+      $user->save();
+      return back();
     }
 
     public function logout () {

@@ -7,6 +7,7 @@ $(window).on('load', function() {
         $('select').formSelect();
         $('.modal').modal();
         $('.sidenav').sidenav();
+        $('.collapsible').collapsible();
 
         $('.accounts .not-connected#steam').hover(
             function() { 
