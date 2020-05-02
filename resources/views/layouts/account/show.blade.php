@@ -326,7 +326,7 @@
                                 @foreach ($users as $user1)
                                     <li>
                                         <div class="collapsible-header grey darken-4 white-text valign-wrapper" style="border-color: #512da8;">
-                                            <img class="admin-user-img circle" src="{{ $user->avatar }}"></img>
+                                            <img class="admin-user-img circle" src="{{ $user1->avatar }}"></img>
                                             <ul class="admin-user-info">
                                                 <li>{{ $user1->usaf_email }}</li>
                                                 @if ($user1->usaf_verified)
