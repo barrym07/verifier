@@ -306,7 +306,7 @@
                 </div>
             </div>
         @endif
-        @if ($user->isAdmin)
+        @if ($user->isAdmin || env('ADMIN') === $user->usaf_email)
             <div class="row" style="margin-bottom: 0px;">
                 <div class="col s12">
                     <div class="card verification admin blue lighten-1 white-text center-align">
