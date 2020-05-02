@@ -123,6 +123,10 @@
         font-size: 13pt;
     }
 
+    .admin-user-info {
+        width: 100%;
+    }
+
     .admin-user-info li, .admin-user-info i {
         display: inline;
         margin: 0px 3px 0px 3px;
@@ -330,12 +334,12 @@
                                             <ul class="admin-user-info">
                                                 <li>{{ $user1->usaf_email }}</li>
                                                 @if ($user1->usaf_verified)
-                                                    <li><i class="fas fa-user-check light-green-text text-accent-3"></i></li>
+                                                    <li><i class="fas fa-user-check light-green-text text-accent-3 right"></i></li>
                                                 @else
-                                                    <li><i class="fas fa-user-check red-text text-accent-3"></i></li>
+                                                    <li><i class="fas fa-user-check red-text text-accent-3 right"></i></li>
                                                 @endif
                                                 @if ($user1->isAdmin)
-                                                    <i class="fas fa-user-shield"></i>
+                                                    <i class="fas fa-user-shield right"></i>
                                                 @endif
                                             </ul>
                                         </div>
