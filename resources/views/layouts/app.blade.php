@@ -34,19 +34,49 @@
         <div class="row no-margin header deep-purple darken-4">
             <div class="container" style="z-index: +100;">
                 <div class="col s12 l8 offset-l2">
-                    <ul class="header-nav left">
+                    <ul class="header-nav left hide-on-med-and-down">
                         <li><a href="https://airforcegaming.com/"><img class="logo" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829" /></a></li>
                         <li><a class="white-text" href="https://news.airforcegaming.com/tag/events/" target="_blank">Events <i class="fas fa-calendar-day"></i></a></li>
-                        <li><a class="white-text" href="https://airforcegaming.com//servers.html">Servers <i class="fas fa-server"></i></a></li>
+                        <li><a class="white-text" href="https://airforcegaming.com/servers.html">Servers <i class="fas fa-server"></i></a></li>
                         <li><a class="white-text" href="#">Teams <i class="fab fa-teamspeak"></i></a></li>
                         <li><a class="white-text" href="https://meet.airforcegaming.com" target="_blank">Collab <i class="fas fa-video"></i></a></li>
-                    </ul>
-                    <ul class="header-nav hide-on-small-only right">
                         <li><a class="white-text" href="https://news.airforcegaming.com/" target="_blank">News <i class="far fa-newspaper"></i></a></li>
+                    </ul>
+                    <ul class="header-nav left hide-on-large-only">
+                        <li><a href="https://airforcegaming.com/"><img class="logo" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829" /></a></li>
+                    </ul>
+                    <ul class="header-nav hide-on-large-only right">
+                        <li><a href="#" data-target="side-menu" class="sidenav-trigger white-text" style="margin-right: -5px;"><i class="fas fa-bars"></i></a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        <ul id="side-menu" class="sidenav">
+            @auth
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img class="right" src="https://cdn.glitch.com/49e8ab49-5e2e-401b-870e-d906216158c8%2Fimage01.png?v=1581937770829">
+                        </div>
+                        <img class="circle" src="{{ Auth::User()->avatar }}"></a>
+                        <span class="white-text name">{{ Auth::User()->name }}</span>
+                        <span class="white-text email">{{ Auth::User()->email }}</span>
+                    </div>
+                </li>
+            @endauth
+            <li><a href="https://airforcegaming.com/"><i class="fas fa-long-arrow-alt-left"></i> Airforcegaming.com</a></li>
+            <li><a href="https://news.airforcegaming.com/tag/events/" target="_blank">Events <i class="fas fa-calendar-day"></i></a></li>
+            <li><a href="https://airforcegaming.com/servers.html">Servers <i class="fas fa-server"></i></a></li>
+            <li><a href="#">Teams <i class="fab fa-teamspeak"></i></a></li>
+            <li><a href="https://meet.airforcegaming.com" target="_blank">Collab <i class="fas fa-video"></i></a></li>
+            <li><a href="https://news.airforcegaming.com/" target="_blank">News <i class="far fa-newspaper"></i></a></li>
+            @auth
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">My AFG</a></li>
+                <li><a class="waves-effect" href="{{ url('/account') }}">Account</a></li>
+                <li><a class="waves-effect" href="{{ url('/logout') }}">Logout</a></li>
+            @endauth
+        </ul>
         <div class="container" style="z-index: +100;">
             @yield('content')
         </div>

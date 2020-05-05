@@ -35,7 +35,7 @@
                             <div class="col s12">
                                 <p class="lead">Thanks for verifying and joining our community.</p>
                                 <br />
-                                <p>head on over to Discord and have fun.</p>
+                                <p>head on over to <a href="https://discord.gg/airforcegaming">Discord</a> and have fun.</p>
                             </div>
                         </div>
                     </div>

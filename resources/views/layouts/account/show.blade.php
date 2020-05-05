@@ -1,5 +1,3 @@
-# Corrected label display for discord username input on line 198 (196 in original)
-
 @extends('layouts.app')
 
 @section('title', 'My Account')
@@ -76,12 +74,88 @@
     .dropdown-content li > a, .dropdown-content li > span {
         color: #fff;
     }
+
+    .resend, .discord, .add-account {
+        margin: 0px 5px 0px 5px;
+        padding: 5px 10px 5px 10px;
+        font-size: 70%;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .accounts i {
+        font-size: 20pt;
+    }
+
+    .accounts .card {
+        text-align: center;
+        padding: 50px 15px 50px 15px;
+        transition: 0.5s;
+        background: #212121;
+    }
+
+    .accounts .card:hover {
+        transition: 0.5s;
+        background: #651fff;
+    }
+
+    .accounts .card i {
+        font-size: 30pt;
+    }
+
+    .accounts .card .connect {
+        display: none;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        font-size: 12pt;
+        font-weight: 500;
+    }
+
+    .admin ul {
+        padding-bottom: 15px;
+    }
+
+    .admin ul li {
+        display: inline;
+        margin: 0px 3px 0px 3px;
+        font-size: 13pt;
+    }
+
+    .admin-user-info {
+        width: 100%;
+    }
+
+    .admin-user-info li, .admin-user-info i {
+        display: inline;
+        margin: 0px 3px 0px 3px;
+        font-size: 12pt;
+    }
+
+    .admin-user-img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .collapsible-body .info {
+        padding: 5px 0px 5px 0px;
+        word-wrap: break-word;
+    }
+
+    .collapsible-body .info h5 {
+        font-size: 15pt;
+    }
 </style>
 @endsection
 
 @section('content')
 <div class="row no-margin" style="margin-top: 12vh;">
-    <div class="col s12 l6">
+    @if ($user->usaf_verified && !$user->isAdmin)
+        <div class="col s12 l6 offset-l3">
+    @else
+        <div class="col s12 l6">
+    @endif
         <div class="row">
             <div class="col s12">
                 <div class="card server grey darken-4 white-text">
@@ -94,6 +168,16 @@
                         </div>
                         <br />
                         <div class="row">
+                            <div class="col s12 center">
+                                <h5 style="font-size: 14pt; margin-bottom: 20px;">Linked Accounts <a class="add-account grey-text text-darken-4 waves-effect waves-dark modal-trigger" href="#linkAccounts" style="background: #fff; border-radius: 15px;">Add</a></h5>
+                                <div class="row">
+                                    <div class="col s12 accounts">
+                                        @foreach ($accountsLinked as $account)
+                                        <i class="fab fa-{{ $account->provider_name }}"></i>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col s12">
                                 <ul class="collection account-info white-text" style="border-color: #512da8; width: 100%;">
                                     <li class="collection-item center deep-purple darken-1">
@@ -114,19 +198,25 @@
                                     </li>
                                     <li class="collection-item center deep-purple darken-1">
                                         <div class="left"><i class="fab fa-discord"></i></div>
-                                        @if (!$user->usaf_email)
+                                        @if (!$user->discordUsername)
                                             <span class="center-align">Discord: Needed</span>
                                         @else
                                         <span class="center-align">{{ $user->discordUsername }}</span>
                                         @endif
                                     </li>
+                                    @if ($user->usaf_verified)
+                                        <li class="collection-item center deep-purple darken-1">
+                                            <div class="left"><i class="fas fa-user-check"></i></div>
+                                            <span class="center-align">Verified</span>
+                                        </li>
+                                    @endif
                                 </ul>    
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s12 l8 offset-l2 center">
                                 @auth
-                                <a class="waves-effect waves-light btn-large blue" href="{{ url('logout') }}"><i class="fab fa-facebook"></i> Logout</a>
+                                <a class="waves-effect waves-light btn-large blue" href="{{ url('logout') }}">Logout</a>
                                 @else
                                     <a class="waves-effect waves-light btn-large blue" href="{{ url('login/facebook') }}"><i class="fab fa-facebook"></i> Login</a>
                                 @endauth
@@ -145,10 +235,15 @@
                         <h5>Verification: Required</h5>
                     </div>
                 </div>
+                <div class="col s12">
+                    <div class="card verification blue lighten-1 white-text center-align">
+                        <h5>Join <a class="discord" href="https://discord.gg/airforcegaming" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
+                    </div>
+                </div>
                 @if ($user->usaf_email)
                     <div class="col s12">
                         <div class="card verification green accent-2 black-text center-align">
-                            <h5>Email sent</h5>
+                            <h5 class="black-text">Email sent <a href="{{ url('/resend') }}" style="text-decoration: none; color: #212121;"><span class="resend light-green accent-4">Re-send</span></a></h5>
                         </div>
                     </div>
                 @endif
@@ -192,12 +287,20 @@
                                         <label>Service component</label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input placeholder="Name#1234" id="discordUsername" name="discordUsername" type="text" class="validate white-text">
-                                        <label for="discordUsername">Discord Username</label>
+                                @if (!$user->discordUsername)
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="Name#1234" id="discordUsername" name="discordUsername" type="text" class="validate white-text">
+                                            <label for="discordUsername">Discord Username</label>
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="{{ $user->discordUsername }}" value="{{ $user->discordUsername }}" id="discordUsername"  name="discordUsername" type="hidden" class="validate white-text">
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <button type="submit" class="waves-effect waves-light btn-large blue">Send email</button>
                                 </div>
@@ -207,6 +310,173 @@
                 </div>
             </div>
         @endif
+        @if ($user->isAdmin || env('ADMIN') === $user->usaf_email)
+            <div class="row" style="margin-bottom: 0px;">
+                <div class="col s12">
+                    <div class="card verification admin blue lighten-1 white-text center-align">
+                        <h5>Admin-land</h5>
+                        <ul>
+                            <li><b>Total Accounts:</b> {{ $totalAccounts }}</li>
+                            <li><b>Verified:</b> {{ $verifiedAccounts }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card server no-buffer grey darken-4 white-text">
+                        <div class="card-content center">
+                            <ul class="collapsible" style="border-color: #512da8;">
+                                @foreach ($users as $user1)
+                                    <li>
+                                        <div class="collapsible-header grey darken-4 white-text valign-wrapper" style="border-color: #512da8;">
+                                            <img class="admin-user-img circle" src="{{ $user1->avatar }}"></img>
+                                            <ul class="admin-user-info">
+                                                <li>{{ $user1->usaf_email }}</li>
+                                                @if ($user1->usaf_verified)
+                                                    <li><i class="fas fa-user-check light-green-text text-accent-3 right"></i></li>
+                                                @else
+                                                    <li><i class="fas fa-user-check red-text text-accent-3 right"></i></li>
+                                                @endif
+                                                @if ($user1->isAdmin)
+                                                    <i class="fas fa-user-shield right"></i>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body" style="border-color: #512da8;">
+                                            <div class="row left-align" style="margin: 0px;">
+                                                <div class="col s12 m6 info">
+                                                    <b>Name: </b> {{ $user1->name }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Email: </b> {{ $user1->email }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Discord: </b> {{ $user1->discordUsername }}
+                                                </div>
+                                                <div class="col s12 m6 info">
+                                                    <b>Component: </b> {{ $user1->component }}
+                                                </div>
+                                            </div>
+                                            <div class="row left-align" style="margin: 0px;">
+                                                <div class="col s12 info">
+                                                    <h5>Actions</h5>
+                                                </div>
+                                                <div class="col s6 info center-align">
+                                                    @if (!$user1->isAdmin)
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/elevate') }}">+ admin</a>
+                                                    @else
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/downgrade') }}">- admin</a>
+                                                    @endif
+                                                </div>
+                                                <div class="col s6 info center-align">
+                                                    <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user1->id.'/delete') }}">Delete user</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
+
+<!-- modals -->
+<div id="linkAccounts" class="modal modal-fixed-footer">
+    <div class="modal-content accounts">
+        <div class="row">
+            <h4>Linked Accounts</h4>
+            <p>Here you can link and manage 3rd-party accounts to your Air Force Gaming (AFG) account. AFG will only utilize 3rd-party account information to help prove social identities across major gaming platforms. <b>Account linking requires matched email address per platform</b></p>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h5>Connected</h5>
+            </div>
+            @foreach ($accountsLinked as $account)
+                <div class="col s6 m3">
+                    <div class="card valign-wrapper grey darken-4 white-text z-depth-2">
+                        <i class="fab fa-{{ $account->provider_name }}" style="margin: 0px auto;"></i>
+                    </div>
+                </div>                 
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h5>Not Connected</h5>
+            </div>
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'facebook']])->get() == '[]')
+                <div class="col s6 m3">
+                    <a href="{{ url('connect/facebook') }}">
+                        <div class="card not-connected valign-wrapper white-text z-depth-3" id="facebook">
+                            <i class="fab fa-facebook" style="margin: 0px auto;"></i><br/>
+                            <div class="connect center-text" id="connect-facebook">
+                                <p>Connect</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'discord']])->get() == '[]')
+                <div class="col s6 m3">
+                    <a href="{{ url('connect/discord') }}">
+                        <div class="card not-connected valign-wrapper white-text z-depth-3" id="discord">
+                            <i class="fab fa-discord" style="margin: 0px auto;"></i><br/>
+                            <div class="connect center-text" id="connect-discord">
+                                <p>Connect</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'steam']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="steam">
+                        <i class="fab fa-steam" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-steam">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'battlenet']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="battlenet">
+                        <i class="fab fa-battle-net" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-battlenet">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'live']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="microsoft">
+                        <i class="fab fa-windows" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-microsoft">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if (DB::table('social_identities')->where([['user_id', '=', $user->id], ['provider_name', '=', 'twitch']])->get() == '[]')
+                <div class="col s6 m3">
+                    <div class="card not-connected valign-wrapper white-text z-depth-3" id="twitch">
+                        <i class="fab fa-twitch" style="margin: 0px auto;"></i><br/>
+                        <div class="connect center-text" id="connect-twitch">
+                            <p>Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+        </div>
     </div>
 </div>
 @endsection

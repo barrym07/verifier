@@ -27,7 +27,14 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
             ->where('provider','battlenet|discord|facebook|live|steam');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/account', 'AccountController@show');
+Route::get('connect/{provider}', 'AccountController@connectProvider')
+            ->where('provider','battlenet|discord|facebook|live|steam');
+
+Route::get('/account', 'AccountController@show')->middleware('auth');
+Route::get('/account/{user}/delete', 'AccountController@deleteUser')->middleware('auth');
+Route::get('/account/{user}/elevate', 'AccountController@addAdmin')->middleware('auth');
+Route::get('/account/{user}/downgrade', 'AccountController@removeAdmin')->middleware('auth');
 
 Route::post('/generateVerification', 'AccountController@emailAuthToken');
+Route::get('/resend', 'AccountController@resendEmailAuthToken');
 Route::get('/verify/{token}', 'AccountController@handleVerifyAttempt');

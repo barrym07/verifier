@@ -78,3 +78,8 @@
     top: 2px;
     max-width: 70px;
   }
+
+  .user-view .background img {
+    height: 25px;
+    margin: 20px 20px 0px 0px;
+  }
