@@ -105,6 +105,7 @@ class AccountController extends Controller
           $reqParamArray['type'] = 'Verification';
           $reqParamArray['disc_name'] = $user->discordUsername;
           $reqParamArray['real_name'] = $user->name;
+          $reqParamArray['component'] = $user->component;
           $reqParamArray['email'] = $user->usaf_email;
           $reqParamArray['url'] = 'https://airforcegaming.com/user/123';
     
