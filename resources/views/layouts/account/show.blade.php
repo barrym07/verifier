@@ -139,8 +139,12 @@
     }
 
     .collapsible-body .info {
-        padding: 5px 0px 5px 0px;
+        padding: 5px 5px 5px 5px;
         word-wrap: break-word;
+    }
+
+    .collapsible-body .info a {
+        width: 100%;
     }
 
     .collapsible-body .info h5 {
@@ -268,11 +272,11 @@
                                 @csrf
                                 <div class="row">
                                     <div class="input-field col s12 m6">
-                                        <input placeholder="@us.af.mil" id="email" name="usaf_email" type="email" class="validate white-text">
+                                        <input placeholder="@us.af.mil / @mail.mil, etc." id="email" name="usaf_email" type="email" class="validate white-text">
                                         <label for="email">Total-force email</label>
                                     </div>
                                     <div class="input-field col s12 m6">
-                                        <input placeholder="@us.af.mil" id="email2" name="email2" type="email" class="validate white-text">
+                                        <input placeholder="@us.af.mil / @mail.mil, etc." id="email2" name="email2" type="email" class="validate white-text">
                                         <label for="email2">Verify email</label>
                                     </div>
                                 </div>
@@ -369,7 +373,12 @@
                                                         <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/downgrade') }}">- admin</a>
                                                     @endif
                                                 </div>
-                                                <div class="col s6 info center-align">
+                                                @if (!$user1->usaf_verified)
+                                                    <div class="col s6 info center-align">
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/verify') }}">Verify User</a>
+                                                    </div>
+                                                @endif
+                                                <div class="col s12 info center-align">
                                                     <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user1->id.'/delete') }}">Delete user</a>
                                                 </div>
                                             </div>

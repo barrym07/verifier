@@ -146,6 +146,13 @@ class AccountController extends Controller
       return back();
     }
 
+    public function adminVerified($user) {
+      $user = User::find($user);
+      $user->usaf_verified = 1;
+      $user->save();
+      return back();
+    }
+
     public function logout () {
       Auth::logout();
       return redirect()->route('/');
