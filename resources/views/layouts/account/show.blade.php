@@ -241,7 +241,7 @@
                 </div>
                 <div class="col s12">
                     <div class="card verification blue lighten-1 white-text center-align">
-                        <h5>Join <a class="discord" href="https://discord.gg/airforcegaming" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
+                        <h5>Join <a class="discord" href="https://discord.gg/AAfW6kN" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
                     </div>
                 </div>
                 @if ($user->usaf_email)
