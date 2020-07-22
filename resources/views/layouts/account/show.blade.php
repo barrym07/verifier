@@ -361,6 +361,9 @@
                                                 <div class="col s12 m6 info">
                                                     <b>Component: </b> {{ $user1->component }}
                                                 </div>
+                                                <div class="col s12 info">
+                                                    <b>Account created: </b> {{ $user1->created_at }}
+                                                </div>
                                             </div>
                                             <div class="row left-align" style="margin: 0px;">
                                                 <div class="col s12 info">
