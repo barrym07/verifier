@@ -37,7 +37,7 @@ class AccountController extends Controller
       $verifiedAccounts = User::where('usaf_verified', 1)->count();
       $users = User::orderByDesc('isAdmin')
                   ->orderBy('created_at', 'asc')
-                  ->orderBy('usaf_verified', 'asc')
+                  ->orderBy('usaf_verified', 'desc')
                   ->get();
 
       $accountsLinked = DB::table('social_identities')->where('user_id', '=', $user->id)->get();
