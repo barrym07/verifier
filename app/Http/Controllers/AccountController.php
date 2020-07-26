@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\SendVerification;
 use App\User;
 use App\SocialIdentity;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -153,6 +155,11 @@ class AccountController extends Controller
       $user->usaf_verified = 1;
       $user->save();
       return back();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     public function logout () {

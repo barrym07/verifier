@@ -47,7 +47,7 @@
     .verification h5 {
         font-size: 14pt;
         font-weight: 600;
-        padding: 15px;
+        padding: 15px 15px 0px 15px;
         margin: 0px;
     }
 
@@ -111,6 +111,10 @@
         width: 100%;
         font-size: 12pt;
         font-weight: 500;
+    }
+
+    .admin h5 {
+        margin-bottom: 0px;
     }
 
     .admin ul {
@@ -322,6 +326,7 @@
                         <ul>
                             <li><b>Total Accounts:</b> {{ $totalAccounts }}</li>
                             <li><b>Verified:</b> {{ $verifiedAccounts }}</li>
+                            <li><a class="waves-effect waves-light btn-small grey darken-3" href="{{ url('/account/users/export') }}">Export</a></li>
                         </ul>
                     </div>
                 </div>

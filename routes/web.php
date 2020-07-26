@@ -35,6 +35,7 @@ Route::get('/account/{user}/delete', 'AccountController@deleteUser')->middleware
 Route::get('/account/{user}/elevate', 'AccountController@addAdmin')->middleware('auth');
 Route::get('/account/{user}/downgrade', 'AccountController@removeAdmin')->middleware('auth');
 Route::get('/account/{user}/verify', 'AccountController@adminVerified')->middleware('auth');
+Route::get('/account/users/export/', 'AccountController@export')->middleware('auth');
 
 Route::post('/generateVerification', 'AccountController@emailAuthToken');
 Route::get('/resend', 'AccountController@resendEmailAuthToken');
