@@ -68,7 +68,7 @@
       <p>to</p>
       <p class="lead"><i>{{ Auth::User()->usaf_email }}</i></p>
       <p>Please forward this email to your personal email then click the link below to finalize your account creation.</p>
-      <p class="lead">Ensure you are in <a href="https://discord.gg/airforcegaming">Discord</a> before clicking "Verify now".</p>
+      <p class="lead">Ensure you are in <a href="https://discord.gg/ZZYTnE8">Discord</a> before clicking "Verify now".</p>
       <a class="button" href="{{ url('/verify') }}/{{  Auth::User()->usaf_verification }}" style="word-break: break-word;">Verify now</a>
     </div>
   </body>

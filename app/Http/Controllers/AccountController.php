@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\SendVerification;
 use App\User;
 use App\SocialIdentity;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,7 @@ class AccountController extends Controller
       $verifiedAccounts = User::where('usaf_verified', 1)->count();
       $users = User::orderByDesc('isAdmin')
                   ->orderBy('created_at', 'asc')
+                  ->orderBy('usaf_verified', 'desc')
                   ->get();
 
       $accountsLinked = DB::table('social_identities')->where('user_id', '=', $user->id)->get();
@@ -105,6 +108,7 @@ class AccountController extends Controller
           $reqParamArray['type'] = 'Verification';
           $reqParamArray['disc_name'] = $user->discordUsername;
           $reqParamArray['real_name'] = $user->name;
+          $reqParamArray['component'] = $user->component;
           $reqParamArray['email'] = $user->usaf_email;
           $reqParamArray['url'] = 'https://airforcegaming.com/user/123';
     
@@ -144,6 +148,18 @@ class AccountController extends Controller
       $user->isAdmin = 0;
       $user->save();
       return back();
+    }
+
+    public function adminVerified($user) {
+      $user = User::find($user);
+      $user->usaf_verified = 1;
+      $user->save();
+      return back();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     public function logout () {

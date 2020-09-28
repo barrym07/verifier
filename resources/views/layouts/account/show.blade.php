@@ -47,7 +47,7 @@
     .verification h5 {
         font-size: 14pt;
         font-weight: 600;
-        padding: 15px;
+        padding: 15px 15px 0px 15px;
         margin: 0px;
     }
 
@@ -113,6 +113,10 @@
         font-weight: 500;
     }
 
+    .admin h5 {
+        margin-bottom: 0px;
+    }
+
     .admin ul {
         padding-bottom: 15px;
     }
@@ -139,8 +143,12 @@
     }
 
     .collapsible-body .info {
-        padding: 5px 0px 5px 0px;
+        padding: 5px 5px 5px 5px;
         word-wrap: break-word;
+    }
+
+    .collapsible-body .info a {
+        width: 100%;
     }
 
     .collapsible-body .info h5 {
@@ -237,7 +245,7 @@
                 </div>
                 <div class="col s12">
                     <div class="card verification blue lighten-1 white-text center-align">
-                        <h5>Join <a class="discord" href="https://discord.gg/airforcegaming" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
+                        <h5>Join <a class="discord" href="https://discord.gg/AAfW6kN" target="_blank" style="background: #fff; border-radius: 15px;">Discord</a> before proceeding</i></h5>
                     </div>
                 </div>
                 @if ($user->usaf_email)
@@ -268,11 +276,11 @@
                                 @csrf
                                 <div class="row">
                                     <div class="input-field col s12 m6">
-                                        <input placeholder="@us.af.mil" id="email" name="usaf_email" type="email" class="validate white-text">
+                                        <input placeholder="@us.af.mil / @mail.mil, etc." id="email" name="usaf_email" type="email" class="validate white-text">
                                         <label for="email">Total-force email</label>
                                     </div>
                                     <div class="input-field col s12 m6">
-                                        <input placeholder="@us.af.mil" id="email2" name="email2" type="email" class="validate white-text">
+                                        <input placeholder="@us.af.mil / @mail.mil, etc." id="email2" name="email2" type="email" class="validate white-text">
                                         <label for="email2">Verify email</label>
                                     </div>
                                 </div>
@@ -318,6 +326,7 @@
                         <ul>
                             <li><b>Total Accounts:</b> {{ $totalAccounts }}</li>
                             <li><b>Verified:</b> {{ $verifiedAccounts }}</li>
+                            <li><a class="waves-effect waves-light btn-small grey darken-3" href="{{ url('/account/users/export') }}">Export</a></li>
                         </ul>
                     </div>
                 </div>
@@ -357,6 +366,9 @@
                                                 <div class="col s12 m6 info">
                                                     <b>Component: </b> {{ $user1->component }}
                                                 </div>
+                                                <div class="col s12 info">
+                                                    <b>Account created: </b> {{ $user1->created_at }}
+                                                </div>
                                             </div>
                                             <div class="row left-align" style="margin: 0px;">
                                                 <div class="col s12 info">
@@ -369,7 +381,12 @@
                                                         <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/downgrade') }}">- admin</a>
                                                     @endif
                                                 </div>
-                                                <div class="col s6 info center-align">
+                                                @if (!$user1->usaf_verified)
+                                                    <div class="col s6 info center-align">
+                                                        <a class="waves-effect waves-light btn-large blue" href="{{ url('/account/'.$user1->id.'/verify') }}">Verify User</a>
+                                                    </div>
+                                                @endif
+                                                <div class="col s12 info center-align">
                                                     <a class="waves-effect waves-light btn-large red accent-3" href="{{ url('/account/'.$user1->id.'/delete') }}">Delete user</a>
                                                 </div>
                                             </div>
